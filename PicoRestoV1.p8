@@ -7,12 +7,14 @@ function _init()
 end
 function _update()
     chef_movement()
+    timer_count()
 end
 function _draw()
     draw_map()
     draw_player()
     draw_ingredient()
     draw_caisse()
+    draw_timer()
 end
 -->8
 --gameplay-chef
@@ -86,6 +88,20 @@ function draw_ingredient()
 end
 -->8
 --timer-score
+timer = 60
+counter = 0
+
+function timer_count()
+	counter = 1/30 --30 car 30fps
+	timer -= counter 
+end
+
+function draw_timer()
+	local timer_formate = flr(timer)
+ print("time   " .. timer_formate,80,5)
+end
+
+
 -->8
 --gameplay-client
 __gfx__
