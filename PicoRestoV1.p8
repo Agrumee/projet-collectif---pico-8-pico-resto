@@ -10,6 +10,8 @@ function _init()
     create_client()
     create_burger()
     client_aleatoire()
+   
+   
 end
 
 function _update()
@@ -236,7 +238,7 @@ end
 --secondes dans le timer
 function draw_timer()
 	local timer_formate = flr(timer)
- print("time   " .. timer_formate,80,5)
+ print("time " .. timer_formate,80,5)
 end
 
 
@@ -249,7 +251,7 @@ end
 
 -->8
 --gameplay client
-
+	
 --initialisation des clients
 function list_clients()
 	clients={
@@ -261,7 +263,7 @@ end
 
 function create_client()
 	client={
-	x=0,
+	x=-1,
 	y=10,
 	order=ceil(rnd(4))
 	--ceil permet d'enlever les 
@@ -312,12 +314,27 @@ function client_move()
 		if chef.burger == client.order
 		then 
 		client.order=0
-		client.x = 11
+		client.x =11
 		affichage_client=sprite
 		client.x += 1
+		else if client.x>16
+		then chef.burger=0 spawn_client()
 	end
 end 
+end
 
+--permet de faire apparatre un
+--nouveau client
+function spawn_client()
+
+ list_clients()
+	create_client()
+	draw_client()
+	client_aleatoire()
+	client_move()
+	draw_order()
+	end
+	
 
 
 -->8
