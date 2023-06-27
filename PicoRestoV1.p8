@@ -12,7 +12,8 @@ function _init()
     create_burger()
     client_aleatoire()
     score=0 
-    burger_shiny()  
+    burger_shiny()
+    create_cuisson()  
 end
 
 function _update()
@@ -21,6 +22,7 @@ function _update()
     client_move()
     update_burger()
     update_assemblage()
+    update_cuisson()
 end
 
 function _draw()
@@ -212,6 +214,23 @@ function draw_frigo()
 	spr(frigo.sprite,frigo.x*8,frigo.y*8,2,2)
 end
 
+function update_cuisson()
+fumee1=14
+fumee2=14
+if chef.x==7
+and chef.steak>0
+and chef.steak<9
+and btn(⬇️)
+then
+	fumee1=rnd(cuisson)
+	fumee2=rnd(cuisson)
+end
+end
+
+function create_cuisson()
+cuisson={45,44}
+end
+
 --afficher les ingredients
 --au premier plan
 function draw_preparation()
@@ -223,7 +242,11 @@ function draw_preparation()
 	spr(52,64,72)
 	spr(53,72,72)
 	spr(53,80,72)
+	spr(fumee1,56,64)
+	spr(fumee2,64,64)
 end
+
+
 -->8
 --inventaire
 
@@ -246,6 +269,8 @@ function draw_ingredient()
  spr(43,80,1)
  print("X"..min(chef.boisson,9),87,3)
 end
+
+
 -->8
 --timer et argent
 
@@ -419,7 +444,6 @@ then
 		print("X"..client.order,23,121)
 		spr(43, 35, 118)
 		print("X"..client.order,41,121)
-
 	end 
 end
 __gfx__
