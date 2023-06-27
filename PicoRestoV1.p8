@@ -36,6 +36,7 @@ function _draw()
 end
 -->8
 --gameplay chef
+
 function create_player()
     chef = { 
     x = 9, 
@@ -49,6 +50,7 @@ function create_player()
     }
 end
 
+--mouvements basiques
 function chef_movement()
     newx = chef.x
     newy = chef.y
@@ -115,6 +117,9 @@ function draw_player()
     spr(chef.sprite, chef.x*8, chef.y*8, 2, 2)
 end
 
+--assemblage du burger par
+--rapport a la demande du 
+--client
 function update_assemblage()
 				if (chef.tomate >= burger.tomate)
 and (chef.pain >= burger.pain)
@@ -123,6 +128,9 @@ and (chef.salade >= burger.salade)
 and (chef.x == 11)
 and (btnp(⬇️))
 then
+--quand assemblage = commande
+--client faire apparaitre le 
+--burger shiny
 burger.finishsprite = 59
 chef.tomate -= burger.tomate
 chef.steak -= burger.steak
@@ -154,7 +162,8 @@ function check_flag(flag, x, y)
     return fget(sprite, flag)
 end
 
-
+--permet de faire passer le 
+--chef derriere la caisse
 function draw_caisse()
  flag1=100
  spr(102,88,56,2,2)
@@ -193,6 +202,9 @@ end
 -->8
 --inventaire
 
+--permet de mettre une limite au
+--nombre d'ingredients qu'on 
+--prendre
 function draw_ingredient()
  spr(50,2,2)
  print("X" .. min(chef.tomate,9),11,5)
@@ -220,25 +232,30 @@ function timer_count()
 	end
 end
 
+--permet d'eviter les 
+--secondes dans le timer
 function draw_timer()
 	local timer_formate = flr(timer)
  print("time   " .. timer_formate,80,5)
 end
 
+
 function draw_gameover()
 	if flr(timer) == 0 then
 	cls()
- print("times up",50,40)
+ spr(6,38,60,6,2)
  end
 end
 
 -->8
 --gameplay client
+
+--initialisation des clients
 function list_clients()
 	clients={
-	196,
-	200,
-	204
+	'le parrain',
+	'zoro',
+	'thelma'
 	}
 end
 
@@ -247,6 +264,8 @@ function create_client()
 	x=0,
 	y=10,
 	order=ceil(rnd(4))
+	--ceil permet d'enlever les 
+	--chiffres decimaux
 	}
 end
 
@@ -255,15 +274,39 @@ function draw_client()
 end
 
 
+--permet de faire apparaitre un
+--client aleatoire 
+function client_aleatoire()
+	aleatoire=rnd(clients)
+		if aleatoire == 'le parrain' then
+		sprite=196
+		minisprite=36
+		spritedos=198
+		
+		else if aleatoire == 'zoro' then
+		sprite=200
+		minisprite = 37
+		spritedos=202
+		
+		else if aleatoire == 'thelma' then
+		sprite=204
+		minisprite=38
+		spritedos=206
+		
+	end
+	end
+	end 
+end
+
+--gere les mouvements du client
 function client_move()
 	client.x+=0.1
-	affichage_client=aleatoire
+	affichage_client=sprite
 		if check_flag(1,client.x,client.y) 
 		then
 		client.x=11
 		affichage_client=spritedos
 		spr(4,8,70,2,2)
-		order = client.order
 	end
 
 		if chef.burger == client.order
@@ -275,34 +318,7 @@ function client_move()
 	end
 end 
 
-function draw_order()
-		spr(39,13,119)
-		spr(minisprite,3,119)
-		print("X"..client.order,23,122)
-	end 
 
-
-function client_aleatoire()
-	aleatoire=rnd(clients)
-		if aleatoire == 196 then
-		sprite=196
-		minisprite=36
-		spritedos=198
-		
-		else if aleatoire == 200 then
-		sprite=200
-		minisprite = 37
-		spritedos=202
-		
-		else if aleatoire == 204 then
-		sprite=204
-		minisprite=38
-		spritedos=206
-		
-	end
-	end
-	end 
-end
 
 -->8
 --burger order 
@@ -322,6 +338,9 @@ function draw_burger()
 	spr(burger.sprite,103,64,2,2)
 end
 
+--faire apparaitre la commande
+--du client lorsqu'il 
+--s'arrete a la caisse
 function update_burger()
 	if client.x == 11 
 	then burger.sprite=4
@@ -329,11 +348,22 @@ function update_burger()
 end
 end
 
+--fait apparaitre le nombre de
+--burgers commande par le client
+--en bas de l'ecran
+function draw_order()
+if client.x==11
+then
+		spr(39,13,119)
+		spr(minisprite,3,119)
+		print("X"..client.order,23,122)
+	end 
+end
 __gfx__
-77777777777777777777777777777777000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-76777777777766777677777777776677000007777770000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-76677777777766777667777777776677000067776667000000777777077077000770777700077777070770770777770000000000000000000000000000000000
-76667777777777777666777777777777000667777766700000777777077077707770777700077777070770770777770000000000000000000000000000000000
+77777777777777777777777777777777000000000000000000000000000000000000000007000000000000000000000000000000000000000000000000000000
+76777777777766777677777777776677000007777770000000000000000000000000000007000000000000000000000000000000000000000000000000000000
+76677777777766777667777777776677000067776667000000777777077077000770777700077777000770770777770000000000000000000000000000000000
+76667777777777777666777777777777000667777766700000777777077077707770777700077777000770770777770000000000000000000000000000000000
 76676777777777777667677777777777006677944976770000007700077077777770770007700000000770770770007700000000000000000000000000000000
 76677677777777777667767777777777006779999997770000007700077077070770770007700000000770770770007700000000000000000000000000000000
 76677766777555777667776677755577006778888887770000007700077077000770770007700000000770770777770000000000000000000000000000000000
