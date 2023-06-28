@@ -278,7 +278,7 @@ end
 -->8
 --timer et argent et timesup
 
-timer = 60
+timer = 2
 counter = 0
 
 
@@ -312,7 +312,7 @@ function draw_gameover()
 	spr(6,42,45,6,2)
 	spr(48,50,65)
  print(score,62,67)
- print("recommencer ❎",40,80)
+ print("recommencer ⬇️",40,80)
 end
 
 
@@ -535,9 +535,9 @@ end
 
 -- pour recommencer le jeu
 function update_timesup()
-	if btn(❎) then
+	if btn(⬇️) then
 	_init() 
-	scene = "game"
+	scene = "start"
 	timer = 60
 	end
 end
