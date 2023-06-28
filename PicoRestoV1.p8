@@ -26,7 +26,10 @@ function _update()
    if scene == "start"
    then update_start() 
  	 elseif scene == "game"
-   then update_game()  
+   then update_game()
+   elseif scene == "timesup"
+   then update_timesup()
+   
 
 end
 end
@@ -35,10 +38,10 @@ function _draw()
     if scene == "start"
     then draw_start()
     elseif scene == "game"
-    then draw_game() 
-    
-    draw_timesup()   
- 
+    then draw_game()
+    elseif scene == "timesup"
+    then draw_timesup()   
+
 end
 end
 -->8
@@ -273,11 +276,11 @@ end
 
 
 -->8
---timer et argent
+--timer et argent et timesup
 
-
-timer = 2
+timer = 60
 counter = 0
+
 
 function timer_count()
 	counter = 1/30 --30 car 30fps
@@ -297,21 +300,23 @@ function draw_timer()
  print(":".. timer_formate,76,121)
 end
 
---affichage time's up
-function draw_gameover()
-	if flr(timer) == 0 then
-	cls()
-	spr(6,42,45,6,2)
-	spr(48,50,62)
- print(score,62,64)
- end
-end
-
 --affiche le score
 function draw_score()
 	spr(48,98,119)
  print(":$"..score,106,121)
- end
+end
+
+--affichage time's up
+function draw_gameover()
+	cls()
+	spr(6,42,45,6,2)
+	spr(48,50,65)
+ print(score,62,67)
+ print("recommencer ❎",40,80)
+end
+
+
+
 -->8
 --gameplay client
 	
@@ -458,20 +463,38 @@ end
 
 
 --permet d'afficher le start
-function draw_start() 
+function draw_start()
 	cls()
 	map(17,0,0,0)
-	print("start",50,62)
-	print("press ❎ to play")
-
+	print("start",56,10)
+	print("choose your cook",33,20)
+	print("using 1-5 keys",36,28)
+	
+	spr(130,25,45,2,2)
+	print("1",32,62)
+	
+	spr(136,58,45,2,2)
+	print("2",65,62)
+	
+	spr(142,88,45,2,2)
+	print("franky",85,62)
+	
+	spr(164,40,75,2,2)
+	print("luci",40,92)
+	
+	spr(170,75,75,2,2)
+	print("5",82,92)
+	
+	print("press ❎ to start",28,109)
+	
 end
 
 
 --affiche tous les sprite du 
 --jeu
 function draw_game()
-cls()
-map(0,0,0,0)
+    cls()
+    map(0,0,0,0)
  		 draw_frigo()
     draw_player()
     draw_caisse()
@@ -485,6 +508,17 @@ map(0,0,0,0)
    	draw_score()
 end
 
+--affiche la scene timesup
+function draw_timesup()
+	   draw_gameover()
+end
+
+--pour passer du start au game
+function update_start()
+ if btn(❎) then scene = "game"
+ end
+end 
+
 --sert a lancer le jeu
 function update_game() 
 			 chef_movement()
@@ -493,26 +527,32 @@ function update_game()
     update_burger()
     update_assemblage()
     update_cuisson()
+    --pour passer du game au gameover
+    if flr(timer) == 0 
+    then scene = "timesup"
+end
+end
+
+-- pour recommencer le jeu
+function update_timesup()
+	if btn(❎) then
+	_init() 
+	scene = "game"
+	timer = 60
+	end
 end
 
 --sert a mettre a jour l'ecran
 -- pour passer du start au game
-function update_start()
 
-	if btnp (❎) 
-	then scene = "game"
-
-end
-end 
 
 
 --sert a passer du game au 
 --gameover quand le timer 
 --arrive a 0
-function draw_timesup() 
-	draw_gameover()
 
-end
+
+
 __gfx__
 77777777777777777777777777777777000000000000000000000000000000000000000007000000000000000000000000000000000000000000000000000000
 76777777777766777677777777776677000007777770000000000000000000000000000007000000000000000000000000000000000000000000000000000000
