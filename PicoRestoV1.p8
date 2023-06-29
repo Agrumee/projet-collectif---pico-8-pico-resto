@@ -1,6 +1,10 @@
 pico-8 cartridge // http://www.pico-8.com
 version 38
 __lua__
+-- pico resto by 
+--r.boireau,c.riviere
+--q.kerzerho,game_picook, 
+
 --global
 
 function _init()
@@ -28,19 +32,21 @@ function _update()
    if scene == "start"
    then update_start() 
    move_curseur()
+   elseif scene == "regles"
+   then update_regles()
  	 elseif scene == "game"
    then update_game()
    elseif scene == "timesup"
    then update_timesup()
    score_increment()
-   
-
 end
 end
 
 function _draw()
     if scene == "start"
     then draw_start()
+    elseif scene == "regles"
+    then draw_regles()
     elseif scene == "game"
     then draw_game()
     elseif scene == "timesup"
@@ -48,6 +54,7 @@ function _draw()
 
 end
 end
+
 -->8
 --gameplay chef
 
@@ -496,6 +503,7 @@ function draw_start()
 	print("DATA",86,92)
 	
 	print("press ❎ to start !",28,109)
+ print("press 🅾️ to show commands",17, 119)
 end
 
 
@@ -594,6 +602,10 @@ function update_start()
  scene = "game"
  end
  
+ if btnp(🅾️)
+ then 
+ scene = "regles"
+ end
 end
 --sert a lancer le jeu
 function update_game() 
@@ -660,6 +672,28 @@ function move_curseur()
 	then curseur.y -=30
 	end
 end
+-->8
+--regles du jeu
+
+--function update_regles
+
+function draw_regles()
+cls()
+print("use ⬆️ to take drinks", 5,25)
+print("use ⬇️ to take ingredients", 5, 35)
+print("use ⬇️ in front of the checkout", 5, 45) 
+print("to give the order", 5, 55)
+print("use ⬅️ ➡️ to move your cook",5, 65)
+print("press ⬅️ to go back at", 5,90) 
+print("the selection", 5, 100)
+end
+
+function update_regles()
+if btnp(⬅️)
+then scene = "start"
+end
+end
+
 __gfx__
 77777777777777777777777777777777000000000000000000000000000000000000000007000000000000000000000000000000000000000000000000000000
 76777777777766777677777777776677000007777770000000000000000000000000000007000000000000000000000000777700000000000000000000000000
