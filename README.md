@@ -21,4 +21,4 @@ Des clients apparaissent avec un design aléatoire parmi 3 et une commande allan
 Le chef cuisinier travaille ses ingrédients : tomates, salades, steaks et pains, il récupère également les canettes dans le réfrigérateur. 
 Une fois que l'ensemble des ingrédients nécessaires à la réalisation de la commande client sont réunis, alors le chef cuisinier peut vendre la commande en validant l'assemblage à la caisse.
 
-![Alt choix du personnage](1.jpg)  ![Alt Vision Frigo](3.jpg)  ![Alt Service](12.jpg)  
+![Alt choix du personnage](1.jpg)  ![Alt Vision Frigo](3.jpg)  ![Alt Service](11.jpg)  
